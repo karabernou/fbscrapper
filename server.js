@@ -14,10 +14,9 @@ app.post('/scrape', async (req, res) => {
 
     let browser;
     try {
-        // Use the executable path defined in the Dockerfile
+        // We removed executablePath so Puppeteer auto-detects its built-in browser!
         browser = await puppeteer.launch({
             headless: "new",
-            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH,
             args: [
                 '--no-sandbox', 
                 '--disable-setuid-sandbox', 
@@ -45,6 +44,7 @@ app.post('/scrape', async (req, res) => {
             await new Promise(r => setTimeout(r, 1000)); 
         } catch (e) {}
 
+        // Extract Data
         const data = await page.evaluate(() => {
             let fullText = '';
             let images = [];
