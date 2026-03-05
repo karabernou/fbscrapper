@@ -6,7 +6,8 @@ ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
 WORKDIR /usr/src/app
 
 COPY package*.json ./
-RUN npm ci
+# Changed this line to use standard install
+RUN npm install
 COPY . .
 
 CMD [ "npm", "start" ]
